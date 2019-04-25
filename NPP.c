@@ -986,7 +986,19 @@ void display_about(void)		//Displaying the first page
 
     setFont(GLUT_BITMAP_TIMES_ROMAN_24);
     glColor3f(0.0,1.0,1.0);
-    drawstring(90,100,0,"SAHYADRI COLLEGE OF ENGINEERING AND MANAGEMENT");
+    drawstring(95,120,0,"SAHYADRI COLLEGE OF ENGINEERING AND MANAGEMENT");
+
+    setFont(GLUT_BITMAP_TIMES_ROMAN_24);
+    glColor3f(0.0,1.0,1.0);
+    drawstring(175,80,0,"PROJECT GUIDE:");
+
+    setFont(GLUT_BITMAP_TIMES_ROMAN_24);
+    glColor3f(0.0,1.0,1.0);
+    drawstring(160,65,0,"Ms. CHAITRA ACHARYA");
+
+    setFont(GLUT_BITMAP_TIMES_ROMAN_24);
+    glColor3f(0.0,1.0,1.0);
+    drawstring(170,50,0,"ASST. PROFESSOR");
 
     setFont(GLUT_BITMAP_TIMES_ROMAN_24);
     glColor3f(1.0,1.0,1.0);
