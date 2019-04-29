@@ -639,7 +639,7 @@ void setFont(void *font)		//To set the font of the string
 void display_nuclear_power_plant()
 {
     glLineWidth(6.0);
-    glClearColor(0.0,0.0,0.0,0.0);
+    glClearColor(0.5,0.5,0.5,0.0);
     glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 
     glBegin(GL_LINE_STRIP);		//Constraint structure
@@ -943,12 +943,161 @@ void display_nuclear_power_plant()
     glEnd();
 
     glFlush();
-    delay(1000);
-    points1();		//Points inside reactor vessel(At the beginning of working of the plant)
 
-    delay(1000);	
-    working();		//Working of the plant
     glFlush();
+}
+
+void structure(void) {
+    glClearColor(0.3,0.3,0.3,0.0);
+    glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+
+    glColor3f(0.0,0.0,0.0);
+    setFont(GLUT_BITMAP_HELVETICA_18);
+    drawstring(180.0,120.0,0.0,"Pump");
+
+    glColor3f(0.0,0.0,0.0);
+    setFont(GLUT_BITMAP_HELVETICA_18);
+    drawstring(180.0,215.0,0.0,"Steam Line");
+
+    glColor3f(0.0,0.0,0.0);
+    setFont(GLUT_BITMAP_HELVETICA_18);
+    drawstring(60.0,20.0,0.0,"Constraint Structure");
+
+    glColor3f(0.0,0.0,0.0);
+    setFont(GLUT_BITMAP_HELVETICA_18);
+    drawstring(260.0,20.0,0.0,"Generator");
+
+    glEnable(GL_LIGHTING);
+    glEnable(GL_LIGHT0);
+    glShadeModel(GL_SMOOTH);
+    glEnable(GL_DEPTH_TEST);
+    glEnable(GL_NORMALIZE);
+
+    GLfloat mat_ambient[] = {0.0f,1.0f,1.0f,1.0f};
+    GLfloat mat_diffuse[] = {1.0f,0.5f,1.0f,1.0f};
+    GLfloat mat_specular[] = {0.5f,0.5f,1.0f,1.0f};
+    GLfloat mat_shininess[] = {25.0f};
+	
+    glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT,mat_ambient);	 	 
+    glMaterialfv(GL_FRONT_AND_BACK,GL_DIFFUSE,mat_diffuse);
+    glMaterialfv(GL_FRONT_AND_BACK,GL_SPECULAR,mat_specular);
+    glMaterialfv(GL_FRONT_AND_BACK,GL_SHININESS,mat_shininess);
+	
+    GLfloat lightIntensity[] = {1.0f,1.0f,1.0f,1.0f};
+    GLfloat light_position[] = {25.0f,50.0f,50.0f,1.0f};
+    glLightfv(GL_LIGHT0,GL_POSITION,light_position);
+    glLightfv(GL_LIGHT0,GL_DIFFUSE,lightIntensity);
+
+    glLineWidth(3.0);
+    glColor3f(0.6,0.3,0.2);
+    glBegin(GL_LINES);
+    glVertex2i(150,104);
+    glVertex2i(180,104);
+    glVertex2i(150,108);
+    glVertex2i(180,108);
+    glEnd();
+
+    glBegin(GL_LINES);
+    glVertex2i(185,100);
+    glVertex2i(185,50);
+    glVertex2i(185,50);
+    glVertex2i(224,50);
+    glVertex2i(189,100);
+    glVertex2i(189,54);
+    glVertex2i(189,54);
+    glVertex2i(224,54);
+    glEnd();
+    
+    glLineWidth(3.0);		//Steam line pipe
+    glColor3f(0.6,0.3,0.2);
+    glBegin(GL_LINES);
+    glVertex2i(240,170);
+    glVertex2f(240,178);
+    glVertex2f(240,180);
+    glVertex2i(240,206);
+    glVertex2i(240,206);
+    glVertex2i(124,206);
+    glVertex2i(124,206);
+    glVertex2f(124,198);
+    glVertex2f(124,196);
+    glVertex2i(124,185);
+    glEnd();
+
+    glBegin(GL_LINES);
+    glVertex2i(120,185);
+    glVertex2i(120,195);
+    glVertex2i(120,197);
+    glVertex2i(120,210);
+    glVertex2i(120,210);
+    glVertex2i(244,210);
+    glVertex2i(244,210);
+    glVertex2i(244,182);
+    glVertex2i(244,180);
+    glVertex2i(244,170);
+    glEnd();
+
+    glColor3f(0.6,0.3,0.2);	//Pump(Between generator and steam generator)
+    glBegin(GL_POLYGON);
+    for(angle=0; angle<=360; angle=angle+5)
+    {
+        angle_radians = angle * (float)3.14159 / (float)180;
+        x = 186 + r5* (float)cos(angle_radians);
+        y = 106 + r5* (float)sin(angle_radians);
+        glLineWidth(6.0);
+        glVertex2f(x,y);
+    }
+    glEnd();
+
+    glBegin(GL_POLYGON);
+    glColor3f(0.4,0.4,0.4);
+    glVertex2i(10,200);
+    glVertex2i(10,30);
+    glVertex2i(80,30);
+    glVertex2i(80,200);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+    glColor3f(0.752941,0.752941,0.752941);
+    glVertex2i(80,200);
+    glVertex2i(80,30);
+    glVertex2i(170,30);
+    glVertex2i(170,200);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+    glColor3f(0.752941,0.752941,0.752941);
+    glVertex2i(220,170);
+    glVertex2i(220,30);
+    glVertex2i(330,30);
+    glVertex2i(330,220);
+    glEnd();
+
+    glColor3f(0.4,0.4,0.4);
+    glBegin(GL_POLYGON);
+    for(int angle=0; angle<=180; angle=angle+5)
+    {
+        float angle_radians = angle * (float)3.14159 / (float)180;
+        float x = 90 + r1* (float)cos(angle_radians);
+        float y = 200 + r1* (float)sin(angle_radians);
+        glLineWidth(6.0);
+        glVertex2f(x,y);
+    }
+    glEnd();
+
+    glBegin(GL_POLYGON);	//Enclosing case of the generator
+    glColor3f(0.6,0.6,0.6);
+    glVertex2f(330,170);
+    glVertex2f(385,170);
+    glVertex2f(385,111);
+    glVertex2f(330,111);
+    glEnd();
+
+    glFlush();
+    glDisable(GL_LIGHTING);
+    glDisable(GL_LIGHT0);
+    glDisable(GL_DEPTH_TEST);
+    glDisable(GL_NORMALIZE);
+
 }
 
 void display_about(void)		//Displaying the first page
@@ -1288,18 +1437,31 @@ void options(int id)
 		display_about();
 		break;
 	    case 2:
-		//glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 		display_nuclear_power_plant();
 		break;
 	    case 3:
-		//glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 		display_operations();
 		break;
 	    case 4:
-		//glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 		reactions();
 		break;
-	    case 5:
+            case 5:
+                glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+                structure();
+                break;
+	    case 6:
+                glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+                display_nuclear_power_plant();
+		delay(1000);
+    		points1();		//Points inside reactor vessel(At the beginning of working of the plant)
+    		delay(1000);	
+    		working();		//Working of the plant
+    		glFlush();
+                break;
+	    case 7:
 		exit(0);
     }
 }
@@ -1313,7 +1475,8 @@ void disp(void)
 
 void init(void)
 {
-    glClearColor(0.0,0.0,0.0,0.0);
+    glClear(GL_COLOR_BUFFER_BIT);
+    glClearColor(0.7,0.7,0.7,0.0);
     glEnable(GL_DEPTH_TEST);
     gluOrtho2D(0.0,400.0,0.0,300.0);
 }
@@ -1327,14 +1490,23 @@ int main(int argc,char** argv)
     glutCreateWindow("Nuclear Power Plant");
 
     init();
-    glutCreateMenu(options);
-    glutAddMenuEntry("About the Project",1);
-    glutAddMenuEntry("Working of power plant",2);
+
+    int submenu_1 = glutCreateMenu(options);
+    glutAddMenuEntry("Internal Structure",2);
+    glutAddMenuEntry("Closed View",5);
+
+    int submenu_2 = glutCreateMenu(options);
     glutAddMenuEntry("About nuclear power plant",3);
     glutAddMenuEntry("Internal reactions",4);
-    glutAddMenuEntry("Quit",5);
+
+    glutCreateMenu(options);
+    glutAddMenuEntry("Title of the Project",1);
+    glutAddSubMenu("View",submenu_1);
+    glutAddMenuEntry("Working",6);
+    glutAddSubMenu("Info",submenu_2);
+    glutAddMenuEntry("Quit",7);
     
-    glutAttachMenu(GLUT_RIGHT_BUTTON);
+    glutAttachMenu(GLUT_LEFT_BUTTON);
     glutDisplayFunc(disp);
     glutMainLoop();
 }
