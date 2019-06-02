@@ -5,13 +5,10 @@
 
 void *font;
 void *currentfont;
-int fontType,flag=0;
-float i,j;
-float x2,y2,r,r1=80,r2=5.0,r3=27.5,r4=6,r5=6,x,y,angle,angle_radians,r6=23,r7=2,r8=3,r9=6,r10=18,r11=10,r12=26,r13=14;
-int k=0;
-int p=0;
+float i,j,x,y,angle,angle_radians;
+float r1=80,r2=5.0,r3=27.5,r4=6,r5=6,r6=23,r8=3,r10=18,r11=10,r12=26,r13=14;
 
-void delay(int x)
+void delay(int x)		//Delay function
 {
     int i,j;
     for(i=0; i<x; i++)
@@ -20,7 +17,7 @@ void delay(int x)
     }
 }
 
-void fig1() //Fans of the Turbine
+void fan1() //Fans of the Turbine
 {
     glBegin(GL_POINTS);
     glVertex2f(255,138);
@@ -45,7 +42,7 @@ void fig1() //Fans of the Turbine
     glEnd();
 }
 
-void fig2() //Fans of the Turbine
+void fan2() //Fans of the Turbine
 {
     glBegin(GL_POINTS);
     glVertex2f(255,138);
@@ -70,7 +67,7 @@ void fig2() //Fans of the Turbine
     glEnd();
 }
 
-void fig3()	//Fans of the Turbine
+void fan3()	//Fans of the Turbine
 {
 
     glBegin(GL_POINTS);
@@ -96,7 +93,7 @@ void fig3()	//Fans of the Turbine
     glEnd();
 }
 
-void fig4()	//Fans of the Turbine
+void fan4()	//Fans of the Turbine
 {
     glBegin(GL_POINTS);
     glVertex2f(255,138);
@@ -121,33 +118,36 @@ void fig4()	//Fans of the Turbine
     glEnd();
 }
 
-void rot1()	//Rotation of fans of the turbine
+void rotateFan()	//Rotation of fans of the turbine
 {
     glDisable(GL_DEPTH_TEST);
-    glColor3f(0.0,0.0,0.0);
-    fig1();
+    glColor3f(0.3,0.1,0.1);		//Display the triangle
+    fan1();
     glFlush();
+    delay(200);
+    glColor3f(0.0,0.0,0.0);		//Hide the triangle to avoid overlapping by setting the color to the background color(black)
+    fan1();
+    glFlush();
+    delay(200);
     glColor3f(0.3,0.1,0.1);
-    fig1();
+    fan2();
+    glFlush();
+    delay(200);
+    glColor3f(0.0,0.0,0.0);
+    fan2();
+    glFlush();
+    delay(200);
+    glColor3f(0.3,0.1,0.1);
+    fan3();
     glFlush();
     glColor3f(0.0,0.0,0.0);
-    fig1();
+    fan3();
     glFlush();
+    delay(200);
     glColor3f(0.3,0.1,0.1);
-    fig2();
+    fan4();
     glFlush();
-    glColor3f(0.0,0.0,0.0);
-    fig2();
-    glFlush();
-    glColor3f(0.3,0.1,0.1);
-    fig3();
-    glFlush();
-    glColor3f(0.0,0.0,0.0);
-    fig3();
-    glFlush();
-    glColor3f(0.3,0.1,0.1);
-    fig4();
-    glFlush();
+    delay(200);
 }
 
 void turbine()	//Circular loop of the turbine
@@ -181,12 +181,12 @@ void turbine()	//Circular loop of the turbine
     glBegin(GL_POINTS);		
     glVertex2f(255,138);	//Center of the turbine
     glEnd();
-    fig4();		//Initial position of the fans
+    fan4();		//Initial position of the fans
 }
 
 void generator()	//Generator
 {
-    glColor3f(0.5,0.5,0.9);	//Part of the generator
+    glColor3f(0.5,0.5,0.9);	//Vertical part of power station
     glBegin(GL_POLYGON);
     glVertex3i(338,120,0);
     glColor3f(0.2,0.2,0.6);
@@ -195,7 +195,7 @@ void generator()	//Generator
     glVertex3i(343,120,0);
     glEnd();
 
-    glColor3f(0.5,0.5,0.9);	//Part of the generator		
+    glColor3f(0.5,0.5,0.9);	//Vertical part of power station		
     glBegin(GL_POLYGON);
     glVertex3i(351,120,0);
     glColor3f(0.2,0.2,0.6);
@@ -204,7 +204,7 @@ void generator()	//Generator
     glVertex3i(356,120,0);
     glEnd();
 
-    glColor3f(0.5,0.5,0.9);	//Part of the generator
+    glColor3f(0.5,0.5,0.9);	//Vertical part of power station
     glBegin(GL_POLYGON);
     glVertex3i(364,120,0);
     glColor3f(0.2,0.2,0.6);
@@ -213,7 +213,7 @@ void generator()	//Generator
     glVertex3i(369,120,0);
     glEnd();
 
-    glColor3f(0.3,0.1,0.1);	//Connection between generator and turbine
+    glColor3f(0.3,0.1,0.1);	//Connection between turbine and power station
     glBegin(GL_POLYGON);
     glVertex3i(375,144,0);
     glVertex3i(277,144,0);
@@ -222,7 +222,7 @@ void generator()	//Generator
     glEnd();
 
     glLineWidth(6.0);
-    glBegin(GL_LINE_STRIP);	//Enclosing case of the generator
+    glBegin(GL_LINE_STRIP);	//Enclosing case of the power station
     glColor3f(0.6,0.6,0.6);
     glVertex2f(330,170);
     glVertex2f(385,170);
@@ -231,7 +231,7 @@ void generator()	//Generator
     glEnd();
 
     glBegin(GL_POLYGON);
-    glColor3f(0.2,0.2,0.6);	//Part of the generator
+    glColor3f(0.2,0.2,0.6);	//Base of vertical lines in power station
     glVertex3i(330,111,0);
     glVertex3i(330,120,0);
     glColor3f(0.5,0.5,0.9);
@@ -239,7 +239,8 @@ void generator()	//Generator
     glVertex3i(375,111,0);
     glEnd();
 }
-void connecting_pipe()	//Connecting pipes of the pump
+
+void connecting_pipe()	//Connecting pipes of the pump between generator and steam generator
 {
     glLineWidth(3.0);
     glColor3f(0.6,0.3,0.2);
@@ -261,10 +262,11 @@ void connecting_pipe()	//Connecting pipes of the pump
     glVertex2i(224,54);
     glEnd();
 }
-void points()	//Scattered points near the turbine
+
+void turbinePoints()	//Scattered points near the turbine
 {
     glPointSize(4);
-    glColor3f(0.4,0.4,0.4);
+    glColor3f(0.7,0.7,0.7);
     glBegin(GL_POINTS);
     glVertex2f(243,134);
     glVertex2f(249,128);
@@ -291,6 +293,7 @@ void points()	//Scattered points near the turbine
     glVertex2f(255,133);
     glEnd();
 }
+
 void steam()
 {
     for(i=0; i<21; i=i+1)	//Filling of steam in the steam line(vertically up)
@@ -390,7 +393,7 @@ void coolant_pipe()	//Flowing of liquid in coolant pipes(between generator and s
     }
 }
 
-void points1()		//Scattered points in the reactor vessel
+void reactorPoints()		//Scattered points in the reactor vessel
 {
     glPointSize(5.0);
     glColor3f(0.0,0.0,1.0);
@@ -409,10 +412,11 @@ void points1()		//Scattered points in the reactor vessel
     glVertex2f(51,134);
     glEnd();
 }
-void points2()		//Scattered points in the steam generator
+
+void generatorPoints()		//Scattered points in the steam generator
 {
     glPointSize(3.0);
-    glColor3f(0.4,0.4,0.4);
+    glColor3f(0.7,0.7,0.7);
     glBegin(GL_POINTS);
     glVertex2f(107,117);
     glVertex2f(109,120);
@@ -458,6 +462,7 @@ void points2()		//Scattered points in the steam generator
     glVertex2f(138,176);
     glEnd();
 }
+
 void working()
 {
     glClearColor(0,0,0,0);
@@ -601,23 +606,13 @@ void working()
         glFlush();
         delay(200);
     }
-    points2();		//Steam in the steam generator
+    generatorPoints();		//Steam in the steam generator
     steam();		//Filling of steam in the steam line
-    glPushMatrix();
-    while(p<200)
-    {
-        flag=1;
-        if(flag==1)
-        {
-            rot1();	//Rotation of the turbine
-        }
-        p++;
-        if(p==199)
-        	glEnable(GL_DEPTH_TEST);
-    }
-    glPopMatrix();
-    points();		//Scattered points near turbine
+    rotateFan();		//Rotation of the turbine
+    glEnable(GL_DEPTH_TEST);
+    turbinePoints();		//Scattered points near turbine
     coolant_pipe();	//Flowing of coolant liquid
+    glutIdleFunc(rotateFan);		//Enable the rotation of the fan (Disabled in display_about())
 }
 
 void drawstring(float x,float y,float z,char *string)		//To write something on the screen
@@ -638,21 +633,20 @@ void setFont(void *font)		//To set the font of the string
 
 void display_nuclear_power_plant()
 {
+    glutIdleFunc(NULL);			//Disable the rotation of the turbine fan
     glLineWidth(6.0);
-    glClearColor(0.5,0.5,0.5,0.0);
+    glClearColor(0.0,0.0,0.0,0.0);
     glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 
     glBegin(GL_LINE_STRIP);		//Constraint structure
-    glColor3f(0.6,0.6,0.6);
+    glColor3f(0.7,0.7,0.7);
     glVertex2i(10,200);
-    glColor3f(0.1,0.3,0.0);
     glVertex2i(10,30);
     glVertex2i(170,30);
-    glColor3f(0.6,0.6,0.6);
     glVertex2i(170,200);
     glEnd();
 
-    glColor3f(0.6,0.6,0.6);
+    glColor3f(0.6,0.6,0.6);		//Curved part of the constraint structure
     glBegin(GL_LINE_STRIP);
     for(angle=0; angle<=180; angle=angle+5)
     {
@@ -664,7 +658,38 @@ void display_nuclear_power_plant()
     }
     glEnd();
 
-    glColor3f(0.6,0.6,0.6);		//Reactor Vessel
+    glBegin(GL_POLYGON);	//Fluid inside reactor vessel
+    glColor3f(0.0,0.0,1.0);
+    glVertex2f(26,122);
+    glColor3f(0.0,0.6,0.8);
+    glVertex2f(26,76);
+    glVertex2f(74,76);
+    glColor3f(0.0,0.0,0.5);
+    glVertex2f(74,122);
+    glEnd();
+
+    glColor3f(0.0,0.6,0.8);	//Liquid inside steam generator(Dark color)
+    glBegin(GL_POLYGON);
+    glVertex2i(100,100);
+    glVertex2i(155,100);
+    glColor3f(0.0,0.0,1.0);
+    glVertex2i(155,113);
+    glVertex2i(100,113);
+    glEnd();
+
+    glColor3f(0.0,0.6,0.8);	//Liquid inside steam generator
+    glBegin(GL_POLYGON);
+    for(angle=180; angle<=360; angle=angle+5)
+    {
+        angle_radians = angle * (float)3.14159 / (float)180;
+        x = 127.5 + r3* (float)cos(angle_radians);
+        y = 100 + r3* (float)sin(angle_radians);
+        glLineWidth(6.0);
+        glVertex2f(x,y);
+    }
+    glEnd();
+
+    glColor3f(0.7,0.7,0.7);		//Reactor Vessel
     glBegin(GL_LINE_LOOP);
     glVertex2i(25,150);
     glVertex2i(25,75);
@@ -672,7 +697,7 @@ void display_nuclear_power_plant()
     glVertex2i(75,150);
     glEnd();
 
-    glColor3f(0.6,0.6,0.6);		//Steam generator
+    glColor3f(0.7,0.7,0.7);		//Steam generator
     glBegin(GL_LINES);
     glVertex2i(100,100);
     glVertex2i(100,170);
@@ -702,7 +727,7 @@ void display_nuclear_power_plant()
     glEnd();
 
     glLineWidth(5.0);		//Core container
-    glColor3f(0.6,0.6,0.6);
+    glColor3f(0.7,0.7,0.7);
     glBegin(GL_LINE_LOOP);
     glVertex2i(42,105);
     glVertex2i(57,105);
@@ -723,13 +748,11 @@ void display_nuclear_power_plant()
     glEnd();
 
     glLineWidth(6.0);		//Case enclosing the generator
-    glColor3f(0.6,0.6,0.6);
+    glColor3f(0.7,0.7,0.7);
     glBegin(GL_LINE_LOOP);
     glVertex2i(220,170);
-    glColor3f(0.1,0.3,0.0);
     glVertex2i(220,30);
     glVertex2i(330,30);
-    glColor3f(0.6,0.6,0.6);
     glVertex2i(330,220);
     glEnd();
 
@@ -832,7 +855,23 @@ void display_nuclear_power_plant()
     glVertex2i(350,61);
     glEnd();
 
-    glColor3f(0.6,0.6,0.4);	//Control Rods
+    glBegin(GL_LINE_LOOP);		//condensor outline
+    glVertex2i(350,95);
+    glVertex2i(350,55);
+    glVertex2i(375,55);
+    glVertex2i(375,95);
+    glEnd();
+
+    glColor3f(0.0,0.6,0.8);		//condensor water
+    glBegin(GL_POLYGON);
+    glVertex2i(351,94);
+    glVertex2i(351,56);
+    glVertex2i(374,56);
+    glVertex2i(374,94);
+    glEnd();
+    
+
+    glColor3f(0.6,0.6,0.4);		//Control Rods
     glBegin(GL_LINES);
     glVertex2i(45,120);
     glVertex2i(45,180);
@@ -902,37 +941,6 @@ void display_nuclear_power_plant()
     setFont(GLUT_BITMAP_HELVETICA_18);
     drawstring(248.0,70.0,0.0,"Condensor Cooling Water");
 
-    glBegin(GL_POLYGON);	//Fluid inside reactor vessel
-    glColor3f(0.0,0.0,1.0);
-    glVertex2f(26,122);
-    glColor3f(0.0,0.6,0.8);
-    glVertex2f(26,76);
-    glVertex2f(74,76);
-    glColor3f(0.0,0.0,0.5);
-    glVertex2f(74,122);
-    glEnd();
-
-    glColor3f(0.0,0.6,0.8);	//Liquid inside steam generator(Dark color)
-    glBegin(GL_POLYGON);
-    glVertex2i(100,100);
-    glVertex2i(155,100);
-    glColor3f(0.0,0.0,1.0);
-    glVertex2i(155,113);
-    glVertex2i(100,113);
-    glEnd();
-
-    glColor3f(0.0,0.6,0.8);	//Liquid inside steam generator
-    glBegin(GL_POLYGON);
-    for(angle=180; angle<=360; angle=angle+5)
-    {
-        angle_radians = angle * (float)3.14159 / (float)180;
-        x = 127.5 + r3* (float)cos(angle_radians);
-        y = 100 + r3* (float)sin(angle_radians);
-        glLineWidth(6.0);
-        glVertex2f(x,y);
-    }
-    glEnd();
-
     glBegin(GL_POLYGON);	//Water inside generator compartment
     glColor3f(0.0,0.6,0.8);
     glVertex2f(221,31);
@@ -948,24 +956,29 @@ void display_nuclear_power_plant()
 }
 
 void structure(void) {
-    glClearColor(0.3,0.3,0.3,0.0);
+    glutIdleFunc(NULL);			//Disable the rotation of the turbine fan
+    glClearColor(0.0,0.0,0.0,0.0);
     glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 
-    glColor3f(0.0,0.0,0.0);
+    glColor3f(1.0,1.0,1.0);
     setFont(GLUT_BITMAP_HELVETICA_18);
     drawstring(180.0,120.0,0.0,"Pump");
 
-    glColor3f(0.0,0.0,0.0);
+    glColor3f(1.0,1.0,1.0);
     setFont(GLUT_BITMAP_HELVETICA_18);
     drawstring(180.0,215.0,0.0,"Steam Line");
 
-    glColor3f(0.0,0.0,0.0);
+    glColor3f(1.0,1.0,1.0);
     setFont(GLUT_BITMAP_HELVETICA_18);
     drawstring(60.0,20.0,0.0,"Constraint Structure");
 
-    glColor3f(0.0,0.0,0.0);
+    glColor3f(1.0,1.0,1.0);
     setFont(GLUT_BITMAP_HELVETICA_18);
     drawstring(260.0,20.0,0.0,"Generator");
+
+    glColor3f(1.0,1.0,1.0);
+    setFont(GLUT_BITMAP_HELVETICA_18);
+    drawstring(340.0,40.0,0.0,"Condensor Water");
 
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
@@ -987,6 +1000,49 @@ void structure(void) {
     GLfloat light_position[] = {25.0f,50.0f,50.0f,1.0f};
     glLightfv(GL_LIGHT0,GL_POSITION,light_position);
     glLightfv(GL_LIGHT0,GL_DIFFUSE,lightIntensity);
+
+    glLineWidth(3.0);
+
+    glBegin(GL_LINES);		//Condensor pipes
+    glVertex2i(350,85);
+    glVertex2f(331,85);
+    glVertex2f(329,85);
+    glVertex2i(244,85);
+    glVertex2i(244,85);
+    glVertex2i(244,65);
+    glVertex2i(244,65);
+    glVertex2i(329,65);
+    glVertex2i(331,65);
+    glVertex2i(350,65);
+    glEnd();
+
+    glBegin(GL_LINES);
+    glVertex2i(350,89);
+    glVertex2i(331,89);
+    glVertex2i(329,89);
+    glVertex2i(240,89);
+    glVertex2i(240,89);
+    glVertex2i(240,61);
+    glVertex2i(240,61);
+    glVertex2i(329,61);
+    glVertex2i(331,61);
+    glVertex2i(350,61);
+    glEnd();
+
+    glBegin(GL_LINE_LOOP);		//condensor outline
+    glVertex2i(350,95);
+    glVertex2i(350,55);
+    glVertex2i(375,55);
+    glVertex2i(375,95);
+    glEnd();
+
+    glColor3f(0.0,0.6,0.8);		//condensor water
+    glBegin(GL_POLYGON);
+    glVertex2i(351,94);
+    glVertex2i(351,56);
+    glVertex2i(374,56);
+    glVertex2i(374,94);
+    glEnd();
 
     glLineWidth(3.0);
     glColor3f(0.6,0.3,0.2);
@@ -1049,30 +1105,14 @@ void structure(void) {
     glEnd();
 
     glBegin(GL_POLYGON);
-    glColor3f(0.4,0.4,0.4);
+    glColor3f(0.4,0.4,0.4);		//Constraint structure
     glVertex2i(10,200);
     glVertex2i(10,30);
-    glVertex2i(80,30);
-    glVertex2i(80,200);
-    glEnd();
-
-    glBegin(GL_POLYGON);
-    glColor3f(0.752941,0.752941,0.752941);
-    glVertex2i(80,200);
-    glVertex2i(80,30);
     glVertex2i(170,30);
     glVertex2i(170,200);
     glEnd();
 
-    glBegin(GL_POLYGON);
-    glColor3f(0.752941,0.752941,0.752941);
-    glVertex2i(220,170);
-    glVertex2i(220,30);
-    glVertex2i(330,30);
-    glVertex2i(330,220);
-    glEnd();
-
-    glColor3f(0.4,0.4,0.4);
+    glColor3f(0.4,0.4,0.4);		//Curved part of the constraint structure
     glBegin(GL_POLYGON);
     for(int angle=0; angle<=180; angle=angle+5)
     {
@@ -1084,12 +1124,20 @@ void structure(void) {
     }
     glEnd();
 
-    glBegin(GL_POLYGON);	//Enclosing case of the generator
+    glBegin(GL_POLYGON);		//Case enclosing the generator
+    glColor3f(0.752941,0.752941,0.752941);
+    glVertex2i(220,170);
+    glVertex2i(220,30);
+    glVertex2i(330,30);
+    glVertex2i(330,220);
+    glEnd();
+
+    glBegin(GL_POLYGON);		//Enclosing case of the power station
     glColor3f(0.6,0.6,0.6);
-    glVertex2f(330,170);
+    glVertex2f(331,170);
     glVertex2f(385,170);
     glVertex2f(385,111);
-    glVertex2f(330,111);
+    glVertex2f(331,111);
     glEnd();
 
     glFlush();
@@ -1102,6 +1150,8 @@ void structure(void) {
 
 void display_about(void)		//Displaying the first page
 {
+    glutIdleFunc(NULL);			//Disable the rotation of the turbine fan
+
     glClearColor(0.0,0.0,0.0,1.0);
     glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 
@@ -1428,56 +1478,56 @@ void display_operations(void)
     glFlush();
 }
 
-void options(int id)
+void options(int id)					//Menu
 {
     switch(id)
     {
 	    case 1:
-		glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-		display_about();
+		display_about();			//Intro page
 		break;
 	    case 2:
-		glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-		display_nuclear_power_plant();
+		display_nuclear_power_plant();		//Internal structure
 		break;
 	    case 3:
-		glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-		display_operations();
+		display_operations();			//About nuclear power plant
 		break;
 	    case 4:
-		glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-		reactions();
+		reactions();				//Info about the reactions in nuclear power plant
 		break;
-            case 5:
-                glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-                structure();
+	    case 5:
+                display_nuclear_power_plant();		
+		delay(1000);
+    		reactorPoints();				//Points inside reactor vessel(At the beginning of working of the plant)
+    		delay(1000);	
+    		working();				//Working of the plant
+    		glFlush();	
                 break;
 	    case 6:
-                glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-                display_nuclear_power_plant();
-		delay(1000);
-    		points1();		//Points inside reactor vessel(At the beginning of working of the plant)
-    		delay(1000);	
-    		working();		//Working of the plant
-    		glFlush();
-                break;
-	    case 7:
 		exit(0);
     }
 }
 
+void keyInput(unsigned char key, int x, int y){
+	
+	if (key == 'c')			//Displays the closed structure when 'c' is pressed
+	{
+		structure();
+	}
+	if (key == 's')			//Displays the internal structure when 's' is pressed
+	{
+		display_nuclear_power_plant();
+		
+	}
+}
+
 void disp(void)
 {
-    glClear(GL_COLOR_BUFFER_BIT);
-    display_about();
+    display_about();		//Displays the intro page in the beginning
     glFlush();
 }
 
 void init(void)
 {
-    glClear(GL_COLOR_BUFFER_BIT);
-    glClearColor(0.7,0.7,0.7,0.0);
-    glEnable(GL_DEPTH_TEST);
     gluOrtho2D(0.0,400.0,0.0,300.0);
 }
 
@@ -1491,9 +1541,7 @@ int main(int argc,char** argv)
 
     init();
 
-    int submenu_1 = glutCreateMenu(options);
-    glutAddMenuEntry("Internal Structure",2);
-    glutAddMenuEntry("Closed View",5);
+    glutKeyboardFunc(keyInput);
 
     int submenu_2 = glutCreateMenu(options);
     glutAddMenuEntry("About nuclear power plant",3);
@@ -1501,12 +1549,12 @@ int main(int argc,char** argv)
 
     glutCreateMenu(options);
     glutAddMenuEntry("Title of the Project",1);
-    glutAddSubMenu("View",submenu_1);
-    glutAddMenuEntry("Working",6);
+    glutAddMenuEntry("Internal Structure",2);
+    glutAddMenuEntry("Working",5);
     glutAddSubMenu("Info",submenu_2);
-    glutAddMenuEntry("Quit",7);
+    glutAddMenuEntry("Quit",6);
     
-    glutAttachMenu(GLUT_LEFT_BUTTON);
+    glutAttachMenu(GLUT_LEFT_BUTTON | GLUT_RIGHT_BUTTON);
     glutDisplayFunc(disp);
     glutMainLoop();
 }
